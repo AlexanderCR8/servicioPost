@@ -10,16 +10,24 @@ const PORT = process.env.PORT || 3000;
 
 //metodos api-rest
 app.get("/", function(req, res, next){
-  res.send("Servicio GET");
+    fs.readFile('./tmp/datos.xml','utf-8',(err,data)=>{
+    if(err){
+      console.log('error: ', err);
+    } else {
+      //console.log(data);
+      res.send(data);
+    }
+  });
+
 });
 
 app.post("/", function(req, res, next){
   console.log(req.body);
-  res.send("Servicio POST");
   var options = {compact: true, ignoreComment: true, spaces: 4};
   var result = convert.json2xml(req.body, options);
   console.log(result);
   fs.writeFileSync('./tmp/datos.xml', result);
+  res.send(result);
 });
 /////////////////////////
 
