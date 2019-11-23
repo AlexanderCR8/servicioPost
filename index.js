@@ -14,7 +14,7 @@ app.get("/", function(req, res, next){
     if(err){
       console.log('error: ', err);
     } else {
-      //console.log(data);
+      console.log(data);
       res.send(data);
     }
   });
